@@ -1,2 +1,2 @@
-# KrakenNetworkEngine
-Custom Unity Client and Server written in C# and .NET
+# Kraken Networking Engine
+Kraken is a custom .NET Server written for Unity.
