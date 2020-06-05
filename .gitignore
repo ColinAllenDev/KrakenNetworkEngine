@@ -2,6 +2,7 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+Kraken-Client/Assets/Standard*Assets/
 Kraken-Client/[Ll]ibrary/
 Kraken-Client/[Tt]emp/
 Kraken-Client/[Oo]bj/
