@@ -2,13 +2,21 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+Kraken-Client/[Ll]ibrary/
+Kraken-Client/[Tt]emp/
+Kraken-Client/[Oo]bj/
+Kraken-Client/[Bb]uild/
+Kraken-Client/[Bb]uilds/
+Kraken-Client/[Ll]ogs/
+Kraken-Client/[Mm]emoryCaptures/
+Kraken-Server/[Ll]ibrary/
+Kraken-Server/[Tt]emp/
+Kraken-Server/[Oo]bj/
+Kraken-Server/[Bb]uild/
+Kraken-Server/[Bb]uilds/
+Kraken-Server/[Ll]ogs/
+Kraken-Server/[Mm]emoryCaptures/
+
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
