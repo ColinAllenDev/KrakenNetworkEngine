@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ServerHandle
 {
@@ -8,7 +6,7 @@ public class ServerHandle
         int _clientIdCheck = _packet.ReadInt();
         string _username = _packet.ReadString();
 
-        Debug.Log($"{Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected successfully and is now player {_fromClient}");
+        Debug.Log($"Player \"{_username}\" (ip: {Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint}) connected successfully and is now Player {_fromClient}");
         if (_fromClient != _clientIdCheck) {
             Debug.Log($"Player \"{_username}\" (ID: {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
         }

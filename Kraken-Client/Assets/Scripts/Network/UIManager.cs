@@ -7,11 +7,14 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     public Client client;
+    
+    // Start Menu
     public GameObject startMenu;
     public InputField usernameField;
     public InputField ipAddressField;
+    
+    // Debug UI
     public Text pingText;
-    public Text clientTick;
 
     private void Awake() {
         if(instance == null) {
@@ -22,29 +25,25 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void DisplayPing() {
+    public void CheckInput() {
+        Button connectBtn = startMenu.GetComponentInChildren<Button>();
+        if(usernameField.text != "" && ipAddressField.text != "") {
+            connectBtn.interactable = true;
+        } else {
+            connectBtn.interactable = false;
+        }
+    }
+
+    public void DisplayDebug() {
         // Display client ping
         pingText.text = ($"Ping: {(GameLogic.instance.RTT * 1000).ToString("f0")}ms");
     }
 
-    public void DisplayTick() {
-        // Display client tick
-        StartCoroutine(Tick(0.01f));
-    }
-
-    private IEnumerator Tick(float delay) {
-        while(true) {
-            yield return new WaitForSeconds(delay);
-            clientTick.text = ($"Tick: {GameLogic.instance.tick}");
-        }
-    }
-
-    public void ConnectToServer() {
+    public void ConnectToServer() {        
         // Change IP Address
-        if(ipAddressField.text != "") {
-            client.ip = ipAddressField.text;
-        }
-
+        if(ipAddressField.text != "localhost")
+        client.ip = ipAddressField.text;
+        
         // Close connection menu
         startMenu.SetActive(false);
         usernameField.interactable = false;

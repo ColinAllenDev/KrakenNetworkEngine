@@ -21,8 +21,7 @@ public class ClientHandle : MonoBehaviour
         int _tick = (int)(_packet.ReadInt() + (RTT / 2));
         GameLogic.instance.RTT = RTT;
         GameLogic.instance.tick = _tick;
-        UIManager.instance.DisplayPing();
-        UIManager.instance.DisplayTick();
+        UIManager.instance.DisplayDebug();
         Debug.Log($"Ping: {(RTT * 1000).ToString("f0")}ms");
     }
 

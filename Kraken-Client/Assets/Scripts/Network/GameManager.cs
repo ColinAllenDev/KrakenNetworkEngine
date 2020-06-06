@@ -27,9 +27,17 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer(int _id, string _username, Vector3 _position, Quaternion _rotation) {
         GameObject _player;
         if(_id == Client.instance.myId) {
+            // Spawn local player
             _player = Instantiate(localPlayerPrefab, _position, _rotation);
+            
+            // Apply username to local player
+            _player.GetComponentInChildren<TextMesh>().text = _username;
         } else {
+            // Spawn network player
             _player = Instantiate(networkPlayerPrefab, _position, _rotation);
+            
+            // Apply username to network player
+            _player.GetComponentInChildren<TextMesh>().text = _username;
         }
 
         EnableSystems();
