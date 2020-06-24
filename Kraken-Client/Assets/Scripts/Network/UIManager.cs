@@ -9,9 +9,12 @@ public class UIManager : MonoBehaviour
     public Client client;
     
     // Start Menu
+    private List<InputField> fields;
+    public Button connectBtn;
     public GameObject startMenu;
     public InputField usernameField;
     public InputField ipAddressField;
+    
     
     // Debug UI
     public Text pingText;
@@ -25,8 +28,28 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    void Start() {
+        fields = new List<InputField>{usernameField, ipAddressField};
+    }
+
+    int _fieldIndex;
+    void Update() {
+        // Tab through input fields
+        if(Input.GetKeyDown(KeyCode.Tab)) {
+            if(fields.Count <= _fieldIndex) {
+                _fieldIndex = 0;
+            }
+            fields[_fieldIndex].Select();
+            _fieldIndex++;
+        }
+
+        // Connect when pressing "Enter"
+        if(Input.GetKeyDown(KeyCode.Return) && connectBtn.interactable) {
+            ConnectToServer();
+        }
+    }
+
     public void CheckInput() {
-        Button connectBtn = startMenu.GetComponentInChildren<Button>();
         if(usernameField.text != "" && ipAddressField.text != "") {
             connectBtn.interactable = true;
         } else {

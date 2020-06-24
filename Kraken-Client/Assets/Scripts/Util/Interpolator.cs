@@ -98,11 +98,12 @@ public class Interpolator : MonoBehaviour
             if (to.rotation != from.rotation)
             {
                 // If this object hasn't reached it's intended rotation
+                if (to.rotation != Quaternion.Euler(0f,0f,0f))
                 transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, _lerpAmount); // Interpolate with the _lerpAmount clamped so no extrapolation occurs
             }
             return;
         }
-
+        if (to.rotation != Quaternion.Euler(0f,0f,0f))
         transform.rotation = Quaternion.SlerpUnclamped(from.rotation, to.rotation, _lerpAmount); // Interpolate with the _lerpAmount unclamped so it can extrapolate
     }
 
@@ -114,10 +115,12 @@ public class Interpolator : MonoBehaviour
             if (to.rotation != from.rotation)
             {
                 // If this object hasn't reached it's intended local rotation
+                if (to.rotation != Quaternion.Euler(0f,0f,0f))
                 transform.localRotation = Quaternion.Slerp(from.rotation, to.rotation, _lerpAmount); // Interpolate with the _lerpAmount clamped so no extrapolation occurs
             }
             return;
         }
+        if (to.rotation != Quaternion.Euler(0f,0f,0f))
         transform.localRotation = Quaternion.SlerpUnclamped(from.rotation, to.rotation, _lerpAmount); // Interpolate with the _lerpAmount unclamped so it can extrapolate
     }
 

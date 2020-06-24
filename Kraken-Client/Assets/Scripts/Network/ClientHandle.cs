@@ -22,7 +22,6 @@ public class ClientHandle : MonoBehaviour
         GameLogic.instance.RTT = RTT;
         GameLogic.instance.tick = _tick;
         UIManager.instance.DisplayDebug();
-        Debug.Log($"Ping: {(RTT * 1000).ToString("f0")}ms");
     }
 
     public static void SpawnPlayer(Packet _packet) {
@@ -40,7 +39,7 @@ public class ClientHandle : MonoBehaviour
 
         if(GameManager.players.TryGetValue(_id, out PlayerManager _player)) {
             // Player movement logic
-            GameManager.players[_id].GetComponent<Interpolator>().NewUpdate(GameLogic.instance.tick, _serverPosition);   
+            _player.GetComponent<Interpolator>().NewUpdate(GameLogic.instance.tick, _serverPosition);   
         }
     }
 
@@ -50,7 +49,18 @@ public class ClientHandle : MonoBehaviour
 
         if(GameManager.players.TryGetValue(_id, out PlayerManager _player)) {
             // Player rotation logic
-            GameManager.players[_id].GetComponent<Interpolator>().NewUpdate(GameLogic.instance.tick, _serverRotation);
+            //_player.GetComponent<Interpolator>().NewUpdate(GameLogic.instance.tick, _serverRotation);
+            _player.transform.rotation = _serverRotation;
+        }
+    }
+
+    public static void PlayerVelocity(Packet _packet) {
+        int _id = _packet.ReadInt();
+        Vector3 _serverVelocity = _packet.ReadVector3();
+
+        if(GameManager.players.TryGetValue(_id, out PlayerManager _player)) {
+            // Player velocity logic
+            _player.SetVelocity(_serverVelocity);
         }
     }
 
@@ -94,4 +104,29 @@ public class ClientHandle : MonoBehaviour
         GameManager.itemSpawners[_spawnerId].ItemPickedUp();
         GameManager.players[_byPlayer].itemCount++;
     }
+
+    public static void SpawnProjectile(Packet _packet) {
+        int _projectileId = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();
+        int _thrownByPlayer = _packet.ReadInt();
+
+        GameManager.instance.SpawnProjectile(_projectileId, _position);
+        GameManager.players[_thrownByPlayer].itemCount--;
+    }
+    
+    public static void ProjectilePosition(Packet _packet) {
+        int _projectileId = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();;
+
+        GameManager.projectiles[_projectileId].transform.position = _position;
+    }
+
+    public static void ProjectileExploded(Packet _packet) {
+        int _projectileId = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();;
+
+        GameManager.projectiles[_projectileId].Explode(_position);
+    }
+
+
 }

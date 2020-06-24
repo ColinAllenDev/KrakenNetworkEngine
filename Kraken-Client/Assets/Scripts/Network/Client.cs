@@ -219,12 +219,16 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             {(int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             {(int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
+            {(int)ServerPackets.playerVelocity, ClientHandle.PlayerVelocity },
             {(int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected},
             {(int)ServerPackets.playerHealth, ClientHandle.PlayerHealth},
             {(int)ServerPackets.playerRespawned, ClientHandle.PlayerRespawned},
             {(int)ServerPackets.createItemSpawner, ClientHandle.CreateItemSpawner},
             {(int)ServerPackets.itemSpawned, ClientHandle.ItemSpawned},
             {(int)ServerPackets.itemPickedUp, ClientHandle.ItemPickedUp},
+            {(int)ServerPackets.spawnProjectile, ClientHandle.SpawnProjectile},
+            {(int)ServerPackets.projectilePosition, ClientHandle.ProjectilePosition},
+            {(int)ServerPackets.projectileExploded, ClientHandle.ProjectileExploded},
             {(int)ServerPackets.ping, ClientHandle.Ping}
         };
         Debug.Log("Initialized packets.");

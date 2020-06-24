@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
     public float health;
     public float maxHealth = 100f;
     public int itemCount = 0;
-    public MeshRenderer model;
+    public Vector3 velocity;
 
     public void Initialize(int _id, string _username) {
         id = _id;
@@ -27,12 +27,18 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void SetVelocity(Vector3 _velocity) {
+        velocity = _velocity;
+    }
+
     public void Die() {
-        model.enabled = false;
+    // TODO: Change death system
+    //    model.enabled = false;
     }
 
     public void Respawn() {
-        model.enabled = true;
+    // TODO: Change respawn system
+    //    model.enabled = true;
         SetHealth(maxHealth);
     }
 }

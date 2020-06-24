@@ -95,6 +95,7 @@ public class Server
             {(int) ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
             {(int) ClientPackets.playerMovement, ServerHandle.PlayerMovement },
             {(int) ClientPackets.playerShoot, ServerHandle.PlayerShoot},
+            {(int) ClientPackets.playerThrowItem, ServerHandle.PlayerThrowItem},
             {(int) ClientPackets.ping, ServerHandle.Ping}
         };
 

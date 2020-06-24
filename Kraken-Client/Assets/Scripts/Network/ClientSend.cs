@@ -28,12 +28,23 @@ public class ClientSend : MonoBehaviour
 
     /// <summary> Sends player movement data to the server </summary>
     /// <param name="_inputs"> The array of inputs from our InputManager</param>
-    public static void PlayerMovement(bool[] _inputs) {
+    public static void PlayerMovement(bool[] _inputs, float[] _axes) {
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement)) {
+            // Write packet lengths
             _packet.Write(_inputs.Length);
+            _packet.Write(_axes.Length);
+
+            // Write keyboard inputs
             foreach(bool _input in _inputs) {
                 _packet.Write(_input);
             }
+
+            // Write keyboard axes
+            foreach(float _axe in _axes) {
+                _packet.Write(_axe);
+            }
+
+            // Write rotation
             _packet.Write(GameManager.players[Client.instance.myId].transform.rotation);
 
             SendUDPData(_packet);
@@ -44,6 +55,14 @@ public class ClientSend : MonoBehaviour
     /// <param name="_facing"> The player's forward facing direction</param>
     public static void PlayerShoot(Vector3 _facing) {
         using(Packet _packet = new Packet((int)ClientPackets.playerShoot)) {
+            _packet.Write(_facing);
+
+            SendTCPData(_packet);
+        }
+    }
+
+    public static void PlayerThrowItem(Vector3 _facing) {
+        using(Packet _packet = new Packet((int)ClientPackets.playerThrowItem)) {
             _packet.Write(_facing);
 
             SendTCPData(_packet);

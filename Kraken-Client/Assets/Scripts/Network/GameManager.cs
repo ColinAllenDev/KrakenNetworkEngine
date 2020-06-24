@@ -8,12 +8,14 @@ public class GameManager : MonoBehaviour
 
     public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
     public static Dictionary<int, ItemSpawner> itemSpawners = new Dictionary<int, ItemSpawner>();
+    public static Dictionary<int, ProjectileManager> projectiles = new Dictionary<int, ProjectileManager>();
 
     public GameObject gameLogic;
 
     public GameObject localPlayerPrefab;
     public GameObject networkPlayerPrefab;
     public GameObject itemSpawnerPrefab;
+    public GameObject projectilePrefab;
     
     private void Awake() {
         if(instance == null) {
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
         if(_id == Client.instance.myId) {
             // Spawn local player
             _player = Instantiate(localPlayerPrefab, _position, _rotation);
-            
+
             // Apply username to local player
             _player.GetComponentInChildren<TextMesh>().text = _username;
         } else {
@@ -55,5 +57,11 @@ public class GameManager : MonoBehaviour
         GameObject _spawner = Instantiate(itemSpawnerPrefab, _position, itemSpawnerPrefab.transform.rotation);
         _spawner.GetComponent<ItemSpawner>().Initialize(_spawnerId, _hasItem);
         itemSpawners.Add(_spawnerId, _spawner.GetComponent<ItemSpawner>());
+    }
+
+    public void SpawnProjectile(int _id, Vector3 _position) {
+        GameObject _projectile = Instantiate(projectilePrefab, _position, Quaternion.identity);
+        _projectile.GetComponent<ProjectileManager>().Initialize(_id);
+        projectiles.Add(_id, _projectile.GetComponent<ProjectileManager>());
     }
 }
