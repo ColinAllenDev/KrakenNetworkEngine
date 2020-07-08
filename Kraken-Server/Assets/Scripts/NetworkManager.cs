@@ -30,12 +30,18 @@ public class NetworkManager : MonoBehaviour
         Server.Stop();
     }
 
+    int spawnIndex = -1;
     public Player InstantiatePlayer() {
-        // Loop through spawn points
-        int _spawnIndex = Random.Range(0, playerSpawns.Count);
+        // Iterate through spawn positions
+        int spawnCount = playerSpawns.Count;
+        if(spawnIndex <= spawnCount) {
+            spawnIndex++;
+        } else {
+            spawnIndex = -1;
+        }
         
         // Spawn player
-        return Instantiate(playerPrefab, playerSpawns[_spawnIndex].position, playerSpawns[_spawnIndex].rotation).GetComponent<Player>();
+        return Instantiate(playerPrefab, playerSpawns[spawnIndex].position, Quaternion.identity).GetComponent<Player>();
     }
 
     public Projectile InstantiateProjectile(Transform _shootOrigin) {

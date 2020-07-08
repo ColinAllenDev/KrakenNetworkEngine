@@ -7,8 +7,6 @@ TagManager:
   - Fire
   - PlayerChest
   - CameraTarget
-  - WeaponOrigin
-  - Weapon
   layers:
   - Default
   - TransparentFX

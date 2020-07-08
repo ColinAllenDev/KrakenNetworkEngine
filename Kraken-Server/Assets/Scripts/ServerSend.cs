@@ -50,6 +50,7 @@ public class ServerSend
         }
     }
 
+
     #region Packets
 
     public static void Welcome(int _toClient, string _msg) {
@@ -58,23 +59,6 @@ public class ServerSend
             _packet.Write(_toClient);
 
             SendTCPData(_toClient, _packet);
-        }
-    }
-
-    public static void Message(int _toClient, string _msg) {
-        using(Packet _packet = new Packet((int)ServerPackets.message)) {
-            _packet.Write(_msg);
-            _packet.Write(_toClient);
-
-            SendTCPData(_toClient, _packet);
-        }
-    }
-
-    public static void Message(string _msg) {
-        using(Packet _packet = new Packet((int)ServerPackets.message)) {
-            _packet.Write(_msg);
-
-            SendTCPDataToAll(_packet);
         }
     }
 
@@ -112,7 +96,7 @@ public class ServerSend
     public static void PlayerVelocity(Player _player) {
         using (Packet _packet = new Packet((int)ServerPackets.playerVelocity)) {
             _packet.Write(_player.id);
-            _packet.Write(_player.GetComponent<PlayerMovement>().getVelocity);
+            _packet.Write(_player.getVelocity);
 
             SendUDPDataToAll(_packet);
         }
@@ -129,20 +113,6 @@ public class ServerSend
         using (Packet _packet = new Packet((int) ServerPackets.playerHealth)) {
             _packet.Write(_player.id);
             _packet.Write(_player.health);
-
-            SendTCPDataToAll(_packet);
-        }
-    }
-
-    public static void PlayerDied(Player _playerKilled, Player _playerKiller) {
-        using(Packet _packet = new Packet((int) ServerPackets.playerDied)) {
-            // Send the id and username of the player killed
-            _packet.Write(_playerKilled.id);
-            _packet.Write(_playerKilled.username);
-
-            // Send the id and username of the player's killer
-            _packet.Write(_playerKiller.id);
-            _packet.Write(_playerKiller.username);
 
             SendTCPDataToAll(_packet);
         }

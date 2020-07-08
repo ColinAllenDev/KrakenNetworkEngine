@@ -30,13 +30,6 @@ public class Projectile : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision collision) {
-        // Make sure projectile is not colliding with player throwing it
-        if(collision.collider.CompareTag("Player")) {
-            int _playerId = collision.collider.GetComponent<Player>().id;
-            if(_playerId == thrownByPlayer) return;
-        }
-
-        // Explode on any other surface
         Explode();
     }
 
