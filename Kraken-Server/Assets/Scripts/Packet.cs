@@ -8,15 +8,21 @@ using UnityEngine;
 public enum ServerPackets
 {
     welcome = 1,
+    message,
     spawnPlayer,
     playerPosition,
     playerRotation,
+    playerVelocity,
     playerDisconnected,
     playerHealth,
     playerRespawned,
+    playerDied,
     createItemSpawner,
     itemSpawned,
     itemPickedUp,
+    spawnProjectile,
+    projectilePosition,
+    projectileExploded,
     ping
 }
 
@@ -26,6 +32,7 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerMovement,
     playerShoot,
+    playerThrowItem,
     ping
 }
 

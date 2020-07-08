@@ -3,8 +3,15 @@ using UnityEngine;
 
 public class Interpolator : MonoBehaviour
 {
+<<<<<<< HEAD
     [SerializeField] private InterpolatorMode mode;
 
+=======
+    #pragma warning disable
+    [SerializeField] private InterpolatorMode mode;
+    #pragma warning enable
+    
+>>>>>>> develop
     private List<TransformUpdate> futureTransformUpdates = new List<TransformUpdate>(); // Oldest first
 
     private TransformUpdate to;
@@ -98,11 +105,19 @@ public class Interpolator : MonoBehaviour
             if (to.rotation != from.rotation)
             {
                 // If this object hasn't reached it's intended rotation
+<<<<<<< HEAD
+=======
+                if (to.rotation != Quaternion.Euler(0f,0f,0f))
+>>>>>>> develop
                 transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, _lerpAmount); // Interpolate with the _lerpAmount clamped so no extrapolation occurs
             }
             return;
         }
+<<<<<<< HEAD
 
+=======
+        if (to.rotation != Quaternion.Euler(0f,0f,0f))
+>>>>>>> develop
         transform.rotation = Quaternion.SlerpUnclamped(from.rotation, to.rotation, _lerpAmount); // Interpolate with the _lerpAmount unclamped so it can extrapolate
     }
 
@@ -114,10 +129,18 @@ public class Interpolator : MonoBehaviour
             if (to.rotation != from.rotation)
             {
                 // If this object hasn't reached it's intended local rotation
+<<<<<<< HEAD
+=======
+                if (to.rotation != Quaternion.Euler(0f,0f,0f))
+>>>>>>> develop
                 transform.localRotation = Quaternion.Slerp(from.rotation, to.rotation, _lerpAmount); // Interpolate with the _lerpAmount clamped so no extrapolation occurs
             }
             return;
         }
+<<<<<<< HEAD
+=======
+        if (to.rotation != Quaternion.Euler(0f,0f,0f))
+>>>>>>> develop
         transform.localRotation = Quaternion.SlerpUnclamped(from.rotation, to.rotation, _lerpAmount); // Interpolate with the _lerpAmount unclamped so it can extrapolate
     }
 

@@ -50,7 +50,6 @@ public class ServerSend
         }
     }
 
-
     #region Packets
 
     public static void Welcome(int _toClient, string _msg) {
@@ -59,6 +58,23 @@ public class ServerSend
             _packet.Write(_toClient);
 
             SendTCPData(_toClient, _packet);
+        }
+    }
+
+    public static void Message(int _toClient, string _msg) {
+        using(Packet _packet = new Packet((int)ServerPackets.message)) {
+            _packet.Write(_msg);
+            _packet.Write(_toClient);
+
+            SendTCPData(_toClient, _packet);
+        }
+    }
+
+    public static void Message(string _msg) {
+        using(Packet _packet = new Packet((int)ServerPackets.message)) {
+            _packet.Write(_msg);
+
+            SendTCPDataToAll(_packet);
         }
     }
 
@@ -93,6 +109,15 @@ public class ServerSend
         }
     }
 
+    public static void PlayerVelocity(Player _player) {
+        using (Packet _packet = new Packet((int)ServerPackets.playerVelocity)) {
+            _packet.Write(_player.id);
+            _packet.Write(_player.GetComponent<PlayerMovement>().getVelocity);
+
+            SendUDPDataToAll(_packet);
+        }
+    }
+
     public static void PlayerDisconnected(int _playerId) {
         using(Packet _packet = new Packet((int) ServerPackets.playerDisconnected)) {
             _packet.Write(_playerId);
@@ -104,6 +129,20 @@ public class ServerSend
         using (Packet _packet = new Packet((int) ServerPackets.playerHealth)) {
             _packet.Write(_player.id);
             _packet.Write(_player.health);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void PlayerDied(Player _playerKilled, Player _playerKiller) {
+        using(Packet _packet = new Packet((int) ServerPackets.playerDied)) {
+            // Send the id and username of the player killed
+            _packet.Write(_playerKilled.id);
+            _packet.Write(_playerKilled.username);
+
+            // Send the id and username of the player's killer
+            _packet.Write(_playerKiller.id);
+            _packet.Write(_playerKiller.username);
 
             SendTCPDataToAll(_packet);
         }
@@ -139,6 +178,34 @@ public class ServerSend
         using (Packet _packet = new Packet((int) ServerPackets.itemPickedUp)) {
             _packet.Write(_spawnerId);
             _packet.Write(_byPlayer);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void SpawnProjectile(Projectile _projectile, int _thrownByPlayer) {
+        using (Packet _packet = new Packet((int) ServerPackets.spawnProjectile)) {
+            _packet.Write(_projectile.id);
+            _packet.Write(_projectile.transform.position);
+            _packet.Write(_thrownByPlayer);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void ProjectilePosition(Projectile _projectile) {
+        using (Packet _packet = new Packet((int) ServerPackets.projectilePosition)) {
+            _packet.Write(_projectile.id);
+            _packet.Write(_projectile.transform.position);
+
+            SendUDPDataToAll(_packet);
+        }
+    }
+
+    public static void ProjectileExploded(Projectile _projectile) {
+        using (Packet _packet = new Packet((int) ServerPackets.projectileExploded)) {
+            _packet.Write(_projectile.id);
+            _packet.Write(_projectile.transform.position);
 
             SendTCPDataToAll(_packet);
         }

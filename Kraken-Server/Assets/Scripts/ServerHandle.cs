@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ServerHandle
 {
@@ -8,7 +6,7 @@ public class ServerHandle
         int _clientIdCheck = _packet.ReadInt();
         string _username = _packet.ReadString();
 
-        Debug.Log($"{Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected successfully and is now player {_fromClient}");
+        Debug.Log($"Player \"{_username}\" (ip: {Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint}) connected successfully and is now Player {_fromClient}");
         if (_fromClient != _clientIdCheck) {
             Debug.Log($"Player \"{_username}\" (ID: {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
         }
@@ -16,17 +14,37 @@ public class ServerHandle
     }
 
     public static void PlayerMovement(int _fromClient, Packet _packet) {
+        // Create input arrays
         bool[] _inputs = new bool[_packet.ReadInt()];
+        float[] _axes = new float[_packet.ReadInt()];
+
+        // Read keyboard inputs
         for (int i = 0; i < _inputs.Length; i++) {
             _inputs[i] = _packet.ReadBool();
         }
-        Quaternion _rotation = _packet.ReadQuaternion();
-        Server.clients[_fromClient].player.SetInput(_inputs, _rotation);
+
+        // Read keyboard axes
+        for(int i = 0; i < _axes.Length; i++) {
+            _axes[i] = _packet.ReadFloat();
+        }
+
+        // Read rotation
+        Quaternion _playerRotation = _packet.ReadQuaternion();
+
+        Server.clients[_fromClient].player.SetInput(_inputs, _axes, _playerRotation);
     }
 
     public static void PlayerShoot(int _fromClient, Packet _packet) {
         Vector3 _shootDirection = _packet.ReadVector3();
-        Server.clients[_fromClient].player.Shoot(_shootDirection);
+        float _damage = _packet.ReadFloat();
+
+        Server.clients[_fromClient].player.Shoot(_shootDirection, _damage);
+    }
+
+    public static void PlayerThrowItem(int _fromClient, Packet _packet) {
+        Vector3 _throwDirection = _packet.ReadVector3();
+        
+        Server.clients[_fromClient].player.ThrowItem(_throwDirection);
     }
 
     public static void Ping(int _fromClient, Packet _packet) {

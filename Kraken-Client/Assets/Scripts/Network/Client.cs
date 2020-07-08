@@ -216,6 +216,7 @@ public class Client : MonoBehaviour
     private void InitializeClientData() {
         packetHandlers = new Dictionary<int, PacketHandler>() {
             {(int)ServerPackets.welcome, ClientHandle.Welcome },
+<<<<<<< HEAD
             {(int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             {(int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             {(int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
@@ -226,6 +227,24 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.itemSpawned, ClientHandle.ItemSpawned},
             {(int)ServerPackets.itemPickedUp, ClientHandle.ItemPickedUp},
             {(int)ServerPackets.ping, ClientHandle.Ping}
+=======
+            {(int)ServerPackets.message, ClientHandle.Message},
+            {(int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
+            {(int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
+            {(int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
+            {(int)ServerPackets.playerVelocity, ClientHandle.PlayerVelocity },
+            {(int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected},
+            {(int)ServerPackets.playerHealth, ClientHandle.PlayerHealth},
+            {(int)ServerPackets.playerRespawned, ClientHandle.PlayerRespawned},
+            {(int)ServerPackets.playerDied, ClientHandle.PlayerDied},
+            {(int)ServerPackets.createItemSpawner, ClientHandle.CreateItemSpawner},
+            {(int)ServerPackets.itemSpawned, ClientHandle.ItemSpawned},
+            {(int)ServerPackets.itemPickedUp, ClientHandle.ItemPickedUp},
+            {(int)ServerPackets.spawnProjectile, ClientHandle.SpawnProjectile},
+            {(int)ServerPackets.projectilePosition, ClientHandle.ProjectilePosition},
+            {(int)ServerPackets.projectileExploded, ClientHandle.ProjectileExploded},
+            {(int)ServerPackets.ping, ClientHandle.Ping},
+>>>>>>> develop
         };
         Debug.Log("Initialized packets.");
     }

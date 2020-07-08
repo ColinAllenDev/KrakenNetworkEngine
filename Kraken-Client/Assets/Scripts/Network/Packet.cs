@@ -7,6 +7,7 @@ using UnityEngine;
 public enum ServerPackets
 {
     welcome = 1,
+<<<<<<< HEAD
     spawnPlayer,
     playerPosition,
     playerRotation,
@@ -16,6 +17,23 @@ public enum ServerPackets
     createItemSpawner,
     itemSpawned,
     itemPickedUp,
+=======
+    message,
+    spawnPlayer,
+    playerPosition,
+    playerRotation,
+    playerVelocity,
+    playerDisconnected,
+    playerHealth,
+    playerRespawned,
+    playerDied,
+    createItemSpawner,
+    itemSpawned,
+    itemPickedUp,
+    spawnProjectile,
+    projectilePosition,
+    projectileExploded,
+>>>>>>> develop
     ping
 }
 
@@ -25,6 +43,10 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerMovement,
     playerShoot,
+<<<<<<< HEAD
+=======
+    playerThrowItem,
+>>>>>>> develop
     ping
 }
 

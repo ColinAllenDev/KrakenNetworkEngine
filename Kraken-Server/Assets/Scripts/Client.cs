@@ -180,6 +180,7 @@ public class Client
             }
         }
 
+        // Spawn items
         foreach (ItemSpawner _itemSpawner in ItemSpawner.spawners.Values) {
             ServerSend.CreateItemSpawner(id, _itemSpawner.spawnerId, _itemSpawner.transform.position, _itemSpawner.hasItem);
         }

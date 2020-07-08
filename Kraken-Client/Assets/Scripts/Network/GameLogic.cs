@@ -32,7 +32,10 @@ public class GameLogic : MonoBehaviour {
     private IEnumerator Ping(float delay) {
         while(true) {
             yield return new WaitForSeconds(delay);
+<<<<<<< HEAD
             Debug.Log("Pinging Server...");
+=======
+>>>>>>> develop
             ClientSend.Ping();
         }
     }

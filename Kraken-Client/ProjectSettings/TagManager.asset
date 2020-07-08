@@ -5,7 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
+<<<<<<< HEAD
   - Breakable
+=======
+  - PlayerChest
+  - CameraTarget
+  - WeaponOrigin
+  - Weapon
+>>>>>>> develop
   layers:
   - Default
   - TransparentFX
@@ -15,9 +22,15 @@ TagManager:
   - UI
   - 
   - 
+<<<<<<< HEAD
   - Ground
   - IgnoreRaycast
   - Breakable
+=======
+  - 
+  - 
+  - 
+>>>>>>> develop
   - 
   - 
   - 

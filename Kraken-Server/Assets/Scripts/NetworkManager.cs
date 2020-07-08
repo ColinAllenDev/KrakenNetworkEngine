@@ -6,6 +6,8 @@ public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager instance;
     public GameObject playerPrefab;
+    public GameObject projectilePrefab;
+    public List<Transform> playerSpawns = new List<Transform>();
 
     private void Awake() {
         if(instance == null) {
@@ -29,6 +31,14 @@ public class NetworkManager : MonoBehaviour
     }
 
     public Player InstantiatePlayer() {
-        return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>();
+        // Loop through spawn points
+        int _spawnIndex = Random.Range(0, playerSpawns.Count);
+        
+        // Spawn player
+        return Instantiate(playerPrefab, playerSpawns[_spawnIndex].position, playerSpawns[_spawnIndex].rotation).GetComponent<Player>();
+    }
+
+    public Projectile InstantiateProjectile(Transform _shootOrigin) {
+        return Instantiate(projectilePrefab, _shootOrigin.position + _shootOrigin.forward * 0.5f, Quaternion.identity).GetComponent<Projectile>();
     }
 }
