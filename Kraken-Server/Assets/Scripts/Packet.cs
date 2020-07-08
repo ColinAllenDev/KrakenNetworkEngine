@@ -8,6 +8,7 @@ using UnityEngine;
 public enum ServerPackets
 {
     welcome = 1,
+    message,
     spawnPlayer,
     playerPosition,
     playerRotation,
@@ -15,6 +16,7 @@ public enum ServerPackets
     playerDisconnected,
     playerHealth,
     playerRespawned,
+    playerDied,
     createItemSpawner,
     itemSpawned,
     itemPickedUp,

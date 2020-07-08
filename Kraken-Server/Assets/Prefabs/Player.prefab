@@ -133,7 +133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5133686019272007098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5604816141009677204}
@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 187003204101612108}
   - component: {fileID: 5698114976473616253}
   - component: {fileID: 2346366803476092208}
+  - component: {fileID: 9086553366704692366}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -219,23 +220,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   username: 
+  health: 0
+  maxHealth: 100
+  itemAmount: 0
+  maxItemAmount: 3
+  shootOrigin: {fileID: 1092167631914764576}
+  throwForce: 600
+--- !u!114 &9086553366704692366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664822985069453979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8510b9b8677d754185827363dad5b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBody: {fileID: 0}
   maxSpeed: 8
   maxAcceleration: 20
   maxAirAcceleration: 5
   jumpHeight: 1.5
-  maxAirJumps: 0
+  maxAirJumps: 1
   maxGroundAngle: 46
   maxStairAngle: 50
   maxSnapSpeed: 100
   probeDistance: 1.5
   probeMask:
     serializedVersion: 2
-    m_Bits: 1331
+    m_Bits: 4294967295
   stairMask:
     serializedVersion: 2
-    m_Bits: 1024
-  shootOrigin: {fileID: 1092167631914764576}
-  health: 0
-  maxHealth: 100
-  itemAmount: 0
-  maxItemAmount: 3
+    m_Bits: 4294967295
