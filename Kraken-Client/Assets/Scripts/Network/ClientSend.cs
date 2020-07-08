@@ -44,7 +44,7 @@ public class ClientSend : MonoBehaviour
                 _packet.Write(_axe);
             }
 
-            // Write rotation
+            // Write player rotation
             _packet.Write(GameManager.players[Client.instance.myId].transform.rotation);
 
             SendUDPData(_packet);
@@ -53,14 +53,17 @@ public class ClientSend : MonoBehaviour
     
     /// <summary> Sends player forward facing direction to the server </summary>
     /// <param name="_facing"> The player's forward facing direction</param>
-    public static void PlayerShoot(Vector3 _facing) {
+    public static void PlayerShoot(Vector3 _facing, float _damage) {
         using(Packet _packet = new Packet((int)ClientPackets.playerShoot)) {
             _packet.Write(_facing);
+            _packet.Write(_damage);
 
             SendTCPData(_packet);
         }
     }
 
+    /// <summary> Sends player forward facing direction to the server </summary>
+    /// <param name="_facing"> The player's forward facing direction</param>
     public static void PlayerThrowItem(Vector3 _facing) {
         using(Packet _packet = new Packet((int)ClientPackets.playerThrowItem)) {
             _packet.Write(_facing);

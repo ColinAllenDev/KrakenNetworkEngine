@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class Interpolator : MonoBehaviour
 {
+    #pragma warning disable
     [SerializeField] private InterpolatorMode mode;
-
+    #pragma warning enable
+    
     private List<TransformUpdate> futureTransformUpdates = new List<TransformUpdate>(); // Oldest first
 
     private TransformUpdate to;

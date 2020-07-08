@@ -29,19 +29,21 @@ public class ServerHandle
         }
 
         // Read rotation
-        Quaternion _rotation = _packet.ReadQuaternion();
-        
-        Server.clients[_fromClient].player.SetInput(_inputs, _axes, _rotation);
+        Quaternion _playerRotation = _packet.ReadQuaternion();
+
+        Server.clients[_fromClient].player.SetInput(_inputs, _axes, _playerRotation);
     }
 
     public static void PlayerShoot(int _fromClient, Packet _packet) {
         Vector3 _shootDirection = _packet.ReadVector3();
-        Server.clients[_fromClient].player.Shoot(_shootDirection);
+        float _damage = _packet.ReadFloat();
+
+        Server.clients[_fromClient].player.Shoot(_shootDirection, _damage);
     }
 
     public static void PlayerThrowItem(int _fromClient, Packet _packet) {
         Vector3 _throwDirection = _packet.ReadVector3();
-
+        
         Server.clients[_fromClient].player.ThrowItem(_throwDirection);
     }
 

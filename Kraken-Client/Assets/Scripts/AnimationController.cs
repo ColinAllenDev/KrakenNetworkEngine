@@ -7,14 +7,19 @@ public class AnimationController : MonoBehaviour
     PlayerManager player;
     Animator animController;
 
-    void Start() {
+    float animVelocity;
+
+    void Awake() {
         player = GetComponent<PlayerManager>();
         animController = GetComponentInChildren<Animator>();
     }
 
-    void Update() {
-        float _velocity = player.velocity.magnitude;
+    void FixedUpdate() {
+        animVelocity = player.velocity.magnitude;
+        SetAnim_Velocity(animVelocity);
+    }
 
+    public void SetAnim_Velocity(float _velocity) {
         animController.SetFloat("_velocity", _velocity);
     }
 }

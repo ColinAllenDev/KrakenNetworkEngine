@@ -12,12 +12,12 @@ public class UIManager : MonoBehaviour
     private List<InputField> fields;
     public Button connectBtn;
     public GameObject startMenu;
+    public GameObject HUD;
     public InputField usernameField;
     public InputField ipAddressField;
     
-    
-    // Debug UI
-    public Text pingText;
+    // Messages
+    public Text deathText;
 
     private void Awake() {
         if(instance == null) {
@@ -29,6 +29,11 @@ public class UIManager : MonoBehaviour
     }
 
     void Start() {
+        // Disable HUD
+        HUD.SetActive(false);
+        deathText.gameObject.SetActive(false);
+
+        // List input fields
         fields = new List<InputField>{usernameField, ipAddressField};
     }
 
@@ -57,9 +62,28 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void DisplayDebug() {
-        // Display client ping
-        pingText.text = ($"Ping: {(GameLogic.instance.RTT * 1000).ToString("f0")}ms");
+    // TODO: Refactor this
+    public void DisplayDeathText(string _username) {
+        // Start respawn countdown and display death text
+        StartCoroutine(RespawnTimer(5.0f, _username));
+    }
+
+    float currentTime;
+    IEnumerator RespawnTimer(float _time, string _username) {
+        // Enable death text
+        deathText.text = ($"Killed By \n{_username}\n\nRespawning...\n5");
+        deathText.gameObject.SetActive(true);
+
+        // Countdown logic
+        currentTime = _time;
+        while(currentTime > 0) {
+            yield return new WaitForSeconds(1.0f);
+            currentTime--;
+            deathText.text = ($"Killed By \n{_username}\n\nRespawning...\n{currentTime}");
+        }
+        
+        // Disable death text
+        deathText.gameObject.SetActive(false);
     }
 
     public void ConnectToServer() {        
@@ -71,6 +95,9 @@ public class UIManager : MonoBehaviour
         startMenu.SetActive(false);
         usernameField.interactable = false;
         ipAddressField.interactable = false;
+
+        // Display HUD
+        HUD.SetActive(true);
 
         // Connect to server
         Client.instance.ConnectToServer();
