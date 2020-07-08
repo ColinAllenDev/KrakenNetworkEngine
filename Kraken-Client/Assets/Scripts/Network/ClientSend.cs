@@ -28,6 +28,14 @@ public class ClientSend : MonoBehaviour
 
     /// <summary> Sends player movement data to the server </summary>
     /// <param name="_inputs"> The array of inputs from our InputManager</param>
+<<<<<<< HEAD
+    public static void PlayerMovement(bool[] _inputs) {
+        using (Packet _packet = new Packet((int)ClientPackets.playerMovement)) {
+            _packet.Write(_inputs.Length);
+            foreach(bool _input in _inputs) {
+                _packet.Write(_input);
+            }
+=======
     public static void PlayerMovement(bool[] _inputs, float[] _axes) {
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement)) {
             // Write packet lengths
@@ -44,7 +52,8 @@ public class ClientSend : MonoBehaviour
                 _packet.Write(_axe);
             }
 
-            // Write rotation
+            // Write player rotation
+>>>>>>> develop
             _packet.Write(GameManager.players[Client.instance.myId].transform.rotation);
 
             SendUDPData(_packet);
@@ -53,17 +62,26 @@ public class ClientSend : MonoBehaviour
     
     /// <summary> Sends player forward facing direction to the server </summary>
     /// <param name="_facing"> The player's forward facing direction</param>
+<<<<<<< HEAD
     public static void PlayerShoot(Vector3 _facing) {
         using(Packet _packet = new Packet((int)ClientPackets.playerShoot)) {
             _packet.Write(_facing);
+=======
+    public static void PlayerShoot(Vector3 _facing, float _damage) {
+        using(Packet _packet = new Packet((int)ClientPackets.playerShoot)) {
+            _packet.Write(_facing);
+            _packet.Write(_damage);
 
             SendTCPData(_packet);
         }
     }
 
+    /// <summary> Sends player forward facing direction to the server </summary>
+    /// <param name="_facing"> The player's forward facing direction</param>
     public static void PlayerThrowItem(Vector3 _facing) {
         using(Packet _packet = new Packet((int)ClientPackets.playerThrowItem)) {
             _packet.Write(_facing);
+>>>>>>> develop
 
             SendTCPData(_packet);
         }

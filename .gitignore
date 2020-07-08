@@ -2,7 +2,11 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+<<<<<<< HEAD
+Kraken-Client/Assets/Standard*Assets/
+=======
 Kraken-Client/[Aa]ssets/Standard\ Assets
+>>>>>>> develop
 Kraken-Client/[Ll]ibrary/
 Kraken-Client/[Tt]emp/
 Kraken-Client/[Oo]bj/
@@ -17,6 +21,10 @@ Kraken-Server/[Bb]uild/
 Kraken-Server/[Bb]uilds/
 Kraken-Server/[Ll]ogs/
 Kraken-Server/[Mm]emoryCaptures/
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
