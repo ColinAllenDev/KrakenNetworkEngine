@@ -8,14 +8,23 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
     public Client client;
     
-    // Start Menu
-    private List<InputField> fields;
-    public Button connectBtn;
+    #region Start Menu
+    [Header("Start Menu")]
     public GameObject startMenu;
+    public Button connectBtn;
+    public List<InputField> inputFields;
+    #endregion
+
+    #region Loadout Menu
+    [Header("Loadout Menu")]
+    public GameObject loadoutMenu;
+    #endregion
+
+    #region HUD
+    [Header("HUD")]
     public GameObject HUD;
-    public InputField usernameField;
-    public InputField ipAddressField;
-    
+    #endregion
+
     // Messages
     public Text deathText;
 
@@ -32,19 +41,16 @@ public class UIManager : MonoBehaviour
         // Disable HUD
         HUD.SetActive(false);
         deathText.gameObject.SetActive(false);
-
-        // List input fields
-        fields = new List<InputField>{usernameField, ipAddressField};
     }
 
     int _fieldIndex;
     void Update() {
         // Tab through input fields
-        if(Input.GetKeyDown(KeyCode.Tab)) {
-            if(fields.Count <= _fieldIndex) {
+        if(Input.GetKeyDown(KeyCode.Tab) && inputFields[0] && inputFields[1]) {
+            if(inputFields.Count <= _fieldIndex) {
                 _fieldIndex = 0;
             }
-            fields[_fieldIndex].Select();
+            inputFields[_fieldIndex].Select();
             _fieldIndex++;
         }
 
@@ -55,7 +61,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void CheckInput() {
-        if(usernameField.text != "" && ipAddressField.text != "") {
+        if(inputFields[0].text != "" && inputFields[1].text != "") {
             connectBtn.interactable = true;
         } else {
             connectBtn.interactable = false;
@@ -88,13 +94,13 @@ public class UIManager : MonoBehaviour
 
     public void ConnectToServer() {        
         // Change IP Address
-        if(ipAddressField.text != "localhost")
-        client.ip = ipAddressField.text;
+        if(inputFields[0].text != "localhost")
+        client.ip = inputFields[0].text;
         
         // Close connection menu
         startMenu.SetActive(false);
-        usernameField.interactable = false;
-        ipAddressField.interactable = false;
+        inputFields[0].interactable = false;
+        inputFields[1].interactable = false;
 
         // Display HUD
         HUD.SetActive(true);

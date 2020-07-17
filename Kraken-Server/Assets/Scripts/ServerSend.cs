@@ -78,6 +78,14 @@ public class ServerSend
         }
     }
 
+    public static void Ping(int _toClient, float _clientTime) {
+        using (Packet _packet = new Packet((int) ServerPackets.ping)) {
+            _packet.Write(_clientTime);
+            _packet.Write(ServerLogic.instance.tick);
+            SendTCPData(_toClient, _packet);
+        }
+    }
+
     public static void SpawnPlayer(int _toClient, Player _player) {
         using (Packet _packet = new Packet((int)ServerPackets.spawnPlayer)) {
             _packet.Write(_player.id);
@@ -134,6 +142,14 @@ public class ServerSend
         }
     }
 
+    public static void PlayerRespawned(Player _player) {
+        using (Packet _packet = new Packet((int) ServerPackets.playerRespawned)) {
+            _packet.Write(_player.id);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
     public static void PlayerDied(Player _playerKilled, Player _playerKiller) {
         using(Packet _packet = new Packet((int) ServerPackets.playerDied)) {
             // Send the id and username of the player killed
@@ -148,11 +164,14 @@ public class ServerSend
         }
     }
 
-    public static void PlayerRespawned(Player _player) {
-        using (Packet _packet = new Packet((int) ServerPackets.playerRespawned)) {
+    public static void PlayerLoadout(int _toClient, Player _player) {
+        using(Packet _packet = new Packet((int) ServerPackets.playerLoadout)) {
             _packet.Write(_player.id);
-
-            SendTCPDataToAll(_packet);
+            _packet.Write(_player.primaryWeapon.weaponName);
+            _packet.Write(_player.secondaryWeapon.weaponName);
+            _packet.Write(_player.meleeWeapon.weaponName);
+            // TODO: We will use weapon ID's when we switch to AssetBundles
+            SendTCPData(_toClient, _packet);
         }
     }
 
@@ -208,14 +227,6 @@ public class ServerSend
             _packet.Write(_projectile.transform.position);
 
             SendTCPDataToAll(_packet);
-        }
-    }
-
-    public static void Ping(int _toClient, float _clientTime) {
-        using (Packet _packet = new Packet((int) ServerPackets.ping)) {
-            _packet.Write(_clientTime);
-            _packet.Write(ServerLogic.instance.tick);
-            SendTCPData(_toClient, _packet);
         }
     }
 

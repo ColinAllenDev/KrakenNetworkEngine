@@ -35,10 +35,9 @@ public class ServerHandle
     }
 
     public static void PlayerShoot(int _fromClient, Packet _packet) {
-        Vector3 _shootDirection = _packet.ReadVector3();
-        float _damage = _packet.ReadFloat();
+        Vector3 _facing = _packet.ReadVector3();
 
-        Server.clients[_fromClient].player.Shoot(_shootDirection, _damage);
+        Server.clients[_fromClient].player.Shoot(_facing);
     }
 
     public static void PlayerThrowItem(int _fromClient, Packet _packet) {

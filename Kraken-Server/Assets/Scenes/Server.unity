@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!65 &159656758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -306,6 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!1 &333308722
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +592,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14136
+  m_Name: pb_Mesh16626
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -879,6 +882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!1 &1053926710
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,6 +929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!65 &1053926713
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1044,7 +1049,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14118
+  m_Name: pb_Mesh16608
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1267,7 +1272,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14108
+  m_Name: pb_Mesh16598
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1483,6 +1488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!1 &1790339564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,6 +1548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!1 &1809483353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,13 +1608,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!43 &1878570442
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14074
+  m_Name: pb_Mesh16564
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1823,6 +1831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!1 &2083978032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,6 +1965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerId: 0
   hasItem: 0
+  currentItem: {fileID: 0}
 --- !u!33 &51089644793007876
 MeshFilter:
   m_ObjectHideFlags: 0

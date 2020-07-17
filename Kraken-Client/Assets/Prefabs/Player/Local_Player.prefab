@@ -886,6 +886,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5423416967913100715}
   - component: {fileID: 1609727953428243963}
+  - component: {fileID: 8167431666524615077}
   - component: {fileID: 9114693885673974867}
   - component: {fileID: 2999172005562723989}
   - component: {fileID: 5376477263510859714}
@@ -932,6 +933,22 @@ MonoBehaviour:
   itemCount: 0
   velocity: {x: 0, y: 0, z: 0}
   state: 0
+--- !u!114 &8167431666524615077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610387501711710816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa50611909250bd489079e2f563baa17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryWeapon: {fileID: 0}
+  secondaryWeapon: {fileID: 0}
+  meleeWeapon: {fileID: 0}
+  weaponSocket: {fileID: 7190077107790890755}
 --- !u!114 &9114693885673974867
 MonoBehaviour:
   m_ObjectHideFlags: 0

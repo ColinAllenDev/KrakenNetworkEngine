@@ -5,38 +5,55 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {    
     #region Networking
+    [Header("Network Settings")]
     public int id;
     public string username;
     #endregion
 
     #region Input Settings
+    [Header("Input Settings")]
     bool[] inputs;
     float[] axes;
     #endregion
 
     #region Health Settings
+    [Header("Health Settings")]
     public float health;
     public float maxHealth = 100f;
     #endregion
 
     #region Item Settings
+    [Header("Item Settings")]
     public int itemAmount = 0;
     public int maxItemAmount = 3;
     #endregion
 
     #region Weapon Settings
-    public Transform shootOrigin;
-    public float throwForce = 600f;
+    [Header("Weapon Settings")]
+    public Transform loadout;
+    private Weapon currentWeapon;
+
+    public Weapon primaryWeapon;
+    public Weapon secondaryWeapon;
+    public Weapon meleeWeapon;
+    public Transform shootOrigin; // Temporary
     #endregion
 
     public void Initialize(int _id, string _username) {
+        // Network
         id = _id;
         username = _username;
 
+        // Health
         health = maxHealth;
     
+        // Input
         inputs = new bool[1];
         axes = new float[2];
+
+        // Weapons
+        currentWeapon = primaryWeapon;
+        currentWeapon.weaponState = Weapon.WeaponState.Equipped;
     }
 
     /// <summary> Input received by ClientHandle is assigned to global variables </summary>
@@ -51,40 +68,36 @@ public class Player : MonoBehaviour
         GetComponent<PlayerMovement>().SetRotation(_playerRotation);
     }
 
-    
-    public void Shoot(Vector3 _viewDirection, float _damage) {
-        if (health <= 0) return;
+    public void InitializeLoadout(int _toClient) {
+        Weapon _primary = Instantiate(primaryWeapon, transform.position, Quaternion.identity, loadout);
+        Weapon _secondary = Instantiate(secondaryWeapon, transform.position, Quaternion.identity, loadout);
+        Weapon _melee = Instantiate(meleeWeapon, transform.position, Quaternion.identity, loadout);
 
-        if(Physics.Raycast(shootOrigin.position, _viewDirection, out RaycastHit _hit, Mathf.Infinity)) {
-            if(_hit.collider.CompareTag("Player")) {
-               // Apply damage to hit player
-               _hit.collider.GetComponent<Player>().TakeDamage(_damage);
+        primaryWeapon = _primary;
+        secondaryWeapon = _secondary;
+        meleeWeapon = _melee;
 
-               // Get the data of player your shot
-               float _hitHealth = _hit.collider.GetComponent<Player>().health;
-               string _hitUsername = _hit.collider.GetComponent<Player>().username;
-               
-               if(_hitHealth <= 0) {
-                   // Send kill data to client
-                   ServerSend.PlayerDied(_hit.collider.GetComponent<Player>(), this);
-
-                   // Debug
-                   Debug.Log($"Player {username} killed Player {_hitUsername}!");
-               } else {
-                   // Debug
-                   Debug.Log($"Player {username} hit Player {_hitUsername} for {_damage} damage!");
-               }
-           }
-       } 
+        primaryWeapon.ownerId = id;
+        secondaryWeapon.ownerId = id;
+        meleeWeapon.ownerId = id;
+        
+        ServerSend.PlayerLoadout(_toClient, this);
     }
 
     public void ThrowItem(Vector3 _viewDirection) {
-        if (health <= 0) return;
+        if (health <= 0) return; // TODO: Dead and Alive state management
         
         if(itemAmount > 0) {
             itemAmount--;
-            NetworkManager.instance.InstantiateProjectile(shootOrigin).Initialize(_viewDirection, throwForce, id);
+            // TODO: Move to grenade item class
+            NetworkManager.instance.InstantiateProjectile(shootOrigin).Initialize(_viewDirection, 5f, id);
         }
+    }
+
+    /// <summary> Shoot the currently equipped weapon </summary>
+    /// <param name=_facing> The direction the player is facing </param>
+    public void Shoot(Vector3 _facing) {
+        currentWeapon.GetComponent<IShootable>().Shoot(_facing);
     }
 
     /// <summary> Handles player taking damage and death </summary>

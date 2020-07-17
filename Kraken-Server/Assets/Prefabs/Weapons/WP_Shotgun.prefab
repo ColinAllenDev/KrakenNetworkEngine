@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2652968057534720271
+--- !u!1 &7836639399205211306
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6046266294565603588}
-  - component: {fileID: 4332222447184997121}
+  - component: {fileID: 7836639399205211303}
+  - component: {fileID: -4609437223111257370}
   m_Layer: 0
-  m_Name: Weapon
+  m_Name: WP_Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6046266294565603588
+--- !u!4 &7836639399205211303
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2652968057534720271}
+  m_GameObject: {fileID: 7836639399205211306}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,22 +31,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4332222447184997121
+--- !u!114 &-4609437223111257370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2652968057534720271}
+  m_GameObject: {fileID: 7836639399205211306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11e90ee0bf213584c885dfed43dd0638, type: 3}
+  m_Script: {fileID: 11500000, guid: dedb163ee8180f740971cccdbfce7fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  weaponId: 0
+  itemType: 0
+  canBePickedUp: 1
+  canBeDropped: 1
   ownerId: 0
-  weaponName: 
-  maxDamage: 100
-  maxAmmo: 15
-  shootOrigin: {fileID: 0}
+  weaponState: 0
+  weaponType: 4
+  fireRate: 1
+  fireType: 0
+  weaponId: 2
+  weaponName: Shotgun
+  maxDamage: 55
+  maxAmmo: 32
+  magSize: 6

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {    
     #region Components
     private PlayerManager player;
+    private Loadout playerLoadout;
     public Transform playerCamera;
     public Transform playerChest;
     #endregion
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     void Start() {
         // Components
         player = GetComponent<PlayerManager>();
+        playerLoadout = GetComponent<Loadout>();
         
         // Lock Cursor
         ToggleCursorMode();
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
         // Shooting Logic
         if(Input.GetKeyDown(KeyCode.Mouse0) && !inputLocked) {
-            ClientSend.PlayerShoot(playerCamera.forward, 25f);
+            ClientSend.PlayerShoot(playerCamera.forward);
         }
 
         // Throwing logic

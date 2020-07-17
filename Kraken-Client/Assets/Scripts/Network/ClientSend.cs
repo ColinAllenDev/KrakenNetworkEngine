@@ -20,7 +20,7 @@ public class ClientSend : MonoBehaviour
     public static void WelcomeReceived() {
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived)) {
             _packet.Write(Client.instance.myId);
-            _packet.Write(UIManager.instance.usernameField.text);
+            _packet.Write(UIManager.instance.inputFields[1].text);
 
             SendTCPData(_packet);
         }
@@ -40,8 +40,8 @@ public class ClientSend : MonoBehaviour
             }
 
             // Write keyboard axes
-            foreach(float _axe in _axes) {
-                _packet.Write(_axe);
+            foreach(float _axis in _axes) {
+                _packet.Write(_axis);
             }
 
             // Write player rotation
@@ -53,10 +53,9 @@ public class ClientSend : MonoBehaviour
     
     /// <summary> Sends player forward facing direction to the server </summary>
     /// <param name="_facing"> The player's forward facing direction</param>
-    public static void PlayerShoot(Vector3 _facing, float _damage) {
+    public static void PlayerShoot(Vector3 _facing) {
         using(Packet _packet = new Packet((int)ClientPackets.playerShoot)) {
             _packet.Write(_facing);
-            _packet.Write(_damage);
 
             SendTCPData(_packet);
         }

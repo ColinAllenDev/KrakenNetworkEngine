@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEditor;
 
 /// <summary> Handles the player's states and attributes </summary>
 public class PlayerManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     public float maxHealth = 100f;
     public int itemCount = 0;
     public Vector3 velocity;
+    public Weapon currentWeapon;
     #endregion
 
     #region Player States
@@ -32,6 +34,8 @@ public class PlayerManager : MonoBehaviour
         username = _username;
         health = maxHealth;
         velocity = Vector3.zero;
+        state = PlayerState.Alive;
+        currentWeapon = GetComponent<Loadout>().GetCurrentWeapon();
     }
 
     /// <summary> Set the health of our player </summary>

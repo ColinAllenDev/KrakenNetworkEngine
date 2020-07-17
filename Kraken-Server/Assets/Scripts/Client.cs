@@ -169,6 +169,7 @@ public class Client
             if (_client.player != null) {
                 if (_client.id != id) {
                     ServerSend.SpawnPlayer(id, _client.player);
+                    ServerSend.PlayerLoadout(id, _client.player);
                 }
             }
         }
@@ -177,8 +178,12 @@ public class Client
         foreach (Client _client in Server.clients.Values) {
             if (_client.player != null) {
                 ServerSend.SpawnPlayer(_client.id, player);
+                ServerSend.PlayerLoadout(_client.id, player);
             }
         }
+
+        // Send loadout information
+        
 
         // Spawn items
         foreach (ItemSpawner _itemSpawner in ItemSpawner.spawners.Values) {

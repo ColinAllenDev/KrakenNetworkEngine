@@ -6,9 +6,10 @@ public class ItemSpawner : MonoBehaviour
 {
     public static Dictionary<int, ItemSpawner> spawners = new Dictionary<int, ItemSpawner>();
     private static int nextSpawnerId = 1;
-
+    
     public int spawnerId;
     public bool hasItem = false;
+    public Item currentItem;
 
     private void Start() {
         hasItem = false;
@@ -16,12 +17,12 @@ public class ItemSpawner : MonoBehaviour
         nextSpawnerId++;
         spawners.Add(spawnerId, this);
 
-        StartCoroutine(SpawnItem());
+        StartCoroutine(SpawnItem(1f));
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(hasItem && other.CompareTag("Player")) {
-            Player _player = other.GetComponent<Player>();
+    private void OnTriggerEnter(Collider col) {
+        if(hasItem && col.CompareTag("Player")) {
+            Player _player = col.GetComponent<Player>();
             if(_player.AttemptPickupItem()) {
                 ItemPickedUp(_player.id);
             }
@@ -31,11 +32,11 @@ public class ItemSpawner : MonoBehaviour
     private void ItemPickedUp(int _byPlayer) {
         hasItem = false;
         ServerSend.ItemPickedUp(spawnerId, _byPlayer);
-        StartCoroutine(SpawnItem());
+        StartCoroutine(SpawnItem(10f));
     }
 
-    private IEnumerator SpawnItem() {
-        yield return new WaitForSeconds(10f);
+    private IEnumerator SpawnItem(float _time) {
+        yield return new WaitForSeconds(_time);
         hasItem = true;
         ServerSend.ItemSpawned(spawnerId);
     }

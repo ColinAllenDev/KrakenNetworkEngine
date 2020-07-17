@@ -97,6 +97,14 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[_id].SetHealth(_health);
     }
 
+    /// <summary> Handles the respawn event sent by the server</summary>
+    /// <param name="_packet"> The player id packet</param>
+    public static void PlayerRespawned(Packet _packet) {
+        int _id = _packet.ReadInt();
+
+        GameManager.players[_id].Respawn();
+    }
+
     /// <summary> Handles the death of a player from the server </summary>
     /// <param name="_packet"> The received death packet </param>
     public static void PlayerDied(Packet _packet) {
@@ -117,13 +125,17 @@ public class ClientHandle : MonoBehaviour
         }
     }
 
-    /// <summary> Handles the respawn event sent by the server</summary>
-    /// <param name="_packet"> The player id packet</param>
-    public static void PlayerRespawned(Packet _packet) {
-        int _id = _packet.ReadInt();
+    public static void PlayerLoadout(Packet _packet) {
+        int _playerId = _packet.ReadInt();
+        string _primary = _packet.ReadString();
+        string _secondary = _packet.ReadString();
+        string _melee = _packet.ReadString();
 
-        GameManager.players[_id].Respawn();
-    }
+        if(GameManager.players.TryGetValue(_playerId, out PlayerManager _player)) {
+            Loadout _loadout = _player.GetComponent<Loadout>();
+            _loadout.SetLoadout(_primary, _secondary, _melee);
+        }
+    } 
 
     /// <summary> Handles the item spawner(s) received from the server</summary>
     /// <param name="_packet"> The spawner id, position, and hasItem packets</param>

@@ -8,6 +8,7 @@ public enum ServerPackets
 {
     welcome = 1,
     message,
+    ping,
     spawnPlayer,
     playerPosition,
     playerRotation,
@@ -16,13 +17,13 @@ public enum ServerPackets
     playerHealth,
     playerRespawned,
     playerDied,
+    playerLoadout,
     createItemSpawner,
     itemSpawned,
     itemPickedUp,
     spawnProjectile,
     projectilePosition,
-    projectileExploded,
-    ping
+    projectileExploded
 }
 
 /// <summary>Sent from client to server.</summary>
